@@ -63,6 +63,10 @@ Pycharm is a python IDE: An integrated development environment (IDE). IDEs are s
 - Once you’ve been approved, select Pycharm from the list of products available and follow the installation guide. You may need to verify your license/activation code before you can have full access to these products. This information can be obtained from your JetBrains account once approved.
 
 ##### Opening project in Pycharm:
+Once you have Pycharm open, click on:
+
+File -> Open -> Project Name, in this case `w4156-lecture-code`
+
 Pycharm allows for the creation and use of virtual environments. We will be using virtual environments in this course to ensure that dependencies, versions, and permissions can be maintained and modified accordingly with relative ease. In this course, we will be using the virtual environment system [virtualenv](https://virtualenv.pypa.io/en/stable/) which can be installed by following these [instructions](https://virtualenv.pypa.io/en/stable/installation/), but we shall instead do it directly from Pycharm because it has virtualenv installed already.
 
 Steps to create a virtual environment in Pycharm can be found [here](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html). Remember that we want to use the dependencies stated in `requirements.txt` of the project and python version 3.6
