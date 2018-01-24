@@ -6,8 +6,8 @@ Lecture code accompanying W4156
 
 This project is committed with broken tests as the examples are 'start from here and fix issue'
 
-# Git and Version Control:
-Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. This allows developers to keep track of changes made on their projects and also allows for collaboration with other developers on the same project.  Some popular version control systems include git, mercurial, subversion (SVN), but for this course, we shall be using Git. For more information on version control systems and how they work, go [here](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
+# Git and Version Control
+Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. This allows developers to keep track of changes made on their projects and also allows for collaboration with other developers on the same project. Some popular version control systems include git, mercurial, subversion (SVN), but for this course, we shall be using Git.  For more information on version control systems and how they work, go [here](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
 
 ### Installing Git:
 Before you start using Git, you have to make it available on your computer. Even if it’s already installed, it’s probably a good idea to update to the latest version. You can either install it as a package or via another installer, or download the source code and compile it yourself.
@@ -59,7 +59,7 @@ Pycharm is a python IDE: An integrated development environment (IDE). IDEs are s
 
 ##### Installing Pycharm:
 - You will first need to create a JetBrains account using your Columbia/Barnard .edu emails to gain student licenses to JetBrains products
-- Go to https://www.jetbrains.com/student/ and click "Apply ow" to gain free access to JetBrains products
+- Go to https://www.jetbrains.com/student/ and click "Apply Now" to gain free access to JetBrains products
 - Once you’ve been approved, select Pycharm from the list of products available and follow the installation guide. You may need to verify your license/activation code before you can have full access to these products. This information can be obtained from your JetBrains account once approved.
 
 ##### Opening project in Pycharm:
