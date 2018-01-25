@@ -4,14 +4,10 @@ Lecture code accompanying W4156
 # Disclaimer
 This project is perhaps the only project that can committed with broken tests as the examples are 'start from here and fix issue'
 
-# Dependencies
-
-
-## Git and Version Control
+## Install Git:
 [Getting Started](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
 
-#### Installing Git:
-##### On Mac:
+### On Mac:
 - The easiest is to install Git from the command line. Use the command below:
 ```
 git --version
@@ -26,10 +22,10 @@ brew doctor
 brew install git
 ```
 
-##### On Windows:
+### On Windows:
 - Download Git from Git for [Windows](http://gitforwindows.org) and install.
 
-##### On Linux:
+### On Linux:
 Open a terminal window. Copy & paste the following into the terminal window and hit Return. You may be prompted to enter your password.
 ```
 sudo apt-get update
@@ -43,9 +39,7 @@ Git will be covered during lectures. Some simple cheat sheets are listed below:
  - [GitHub's Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
  - [Git reference docs](https://git-scm.com/docs)
 
-### GitHub and Git 
-
-##### Cloning our projectrepository from GitHub:
+## Cloning lecture project from github:
 To clone/download this repository to your computer:
 - Look for the green clone or download button in the code tab of the repository and click on it.
 - Copy the https link of the git repository that is displayed
@@ -57,8 +51,8 @@ git clone https://github.com/geod/w4156-lecture-code.git
 - Cloned repository should now be locally available on your computer in location you specified.
 - You could also download a zipped version of the project by clicking download zip option.
 
-## Installing Pycharm IDE:
-- You will first need to create a JetBrains account using your Columbia/Barnard `.edu` emails to gain student licenses to JetBrains products
+## Install Pycharm IDE:
+- Create a JetBrains account using your Columbia/Barnard `.edu` emails to gain student licenses to JetBrains products
 - Go to https://www.jetbrains.com/student/ and click `Apply Now` to gain free access to JetBrains products
 - Fill in the respective form and follow the steps to have your `.edu` emails authenticated
 - Once you’ve been approved, select Pycharm from the list of products available from your JetBrains account and follow the installation guide.
@@ -83,7 +77,7 @@ If that is a bit confusing you should follow these steps:
 - At this point, anytime you make a change to requirements.txt, Pycharm will ask you to install the new dependency. For more information, you can check this [link](https://www.jetbrains.com/help/pycharm/creating-requirement-files.html).
 
 
-## Setup without Pycharm can also be done as follows:
+## Alternative: Setup without Pycharm can also be done as follows:
 Assumes [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) is installed.
 ```
 virtualenv --python=python3.6 venv
