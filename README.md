@@ -1,48 +1,49 @@
 # w4156-lecture-code
-
 Lecture code accompanying W4156
 
 # Disclaimer
+This project is perhaps the only project that can committed with broken tests as the examples are 'start from here and fix issue'
 
-This project is committed with broken tests as the examples are 'start from here and fix issue'
+# Dependencies
 
-# Git and Version Control
-Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. This allows developers to keep track of changes made on their projects, and also allows for collaboration with other developers on the same project. Some popular version control systems include git, mercurial, subversion (SVN), but for this course, we shall be using Git.  For more information on version control systems and how they work, go [here](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
 
-### Installing Git:
-Before you start using Git, you have to make it available on your computer. Even if it’s already installed, it’s probably a good idea to update to the latest version. You can either install it as a package or via another installer, or download the source code and compile it yourself.
+## Git and Version Control
+[Getting Started](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
 
+#### Installing Git:
 ##### On Mac:
 - The easiest is to install Git from the command line. Use the command below:
-
-    `git --version`
-
+```
+git --version
+```
 If you don’t have it installed already on your Mac, it will prompt you to install it by showing you a relevant git installation command based on your system's configurations.
 
 You could also use [homebrew](https://brew.sh) which is a package management system for Macs
-- In terminal copy and run the following:  
-- `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-- `brew doctor`
-- `brew install git`
+- In terminal copy and run the following:
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+brew install git
+```
 
 ##### On Windows:
-- Download Git from Git for [Windows](http://gitforwindows.org) and install it.
+- Download Git from Git for [Windows](http://gitforwindows.org) and install.
 
 ##### On Linux:
 Open a terminal window. Copy & paste the following into the terminal window and hit Return. You may be prompted to enter your password.
-- `sudo apt-get update`
-- `sudo apt-get upgrade`
-- `sudo apt-get install git`
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git
+```
 
 Git downloads for all systems with further instructions, can also be found [here](https://git-scm.com/downloads).
 
-Git can be a little confusing to begin with because there are so many commands! These links provide some insight on the basic ones you should know and will be using frequently during the course.
+Git will be covered during lectures. Some simple cheat sheets are listed below:
  - [GitHub's Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
  - [Git reference docs](https://git-scm.com/docs)
 
-
 ### GitHub and Git 
-GitHub is a web-based hosting service for version control using git. It is mostly used for maintaining software code. It offers all of the distributed version control and source code management functionality of Git as well as adding its own features. Most of the work done between developers involves cloning, pushing and pulling changes made from a software project/repository that is hosted on GitHub.
 
 ##### Cloning our projectrepository from GitHub:
 To clone/download this repository to your computer:
@@ -50,7 +51,9 @@ To clone/download this repository to your computer:
 - Copy the https link of the git repository that is displayed
 - Open the terminal on your computer and navigate to location where you want your repository to be saved
 - Type git clone followed by repository-link-you-copied, so in this case:
-` git clone https://github.com/geod/w4156-lecture-code.git`
+```
+git clone https://github.com/geod/w4156-lecture-code.git
+```
 - Cloned repository should now be locally available on your computer in location you specified.
 - You could also download a zipped version of the project by clicking download zip option.
 
@@ -84,8 +87,9 @@ If that is a bit confusing you should follow these steps:
 
 
 ###### Setup without Pycharm can also be done as follows:
-1. `virtualenv --python=python3.6 venv`
-2. `source bin/venv_activate.sh`
-3. `pip install -r requirements.txt`
-
-This assumes you have [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) already installed on your computer.
+Assumes [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) is installed.
+```
+virtualenv --python=python3.6 venv
+source bin/venv_activate.sh
+pip install -r requirements.txt
+```
