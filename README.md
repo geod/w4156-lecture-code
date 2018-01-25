@@ -57,16 +57,13 @@ git clone https://github.com/geod/w4156-lecture-code.git
 - Cloned repository should now be locally available on your computer in location you specified.
 - You could also download a zipped version of the project by clicking download zip option.
 
-### Working with Pycharm
-Pycharm is a python IDE: An integrated development environment (IDE). IDEs are software applications that provide comprehensive facilities to computer programmers such as a source code editor, build automation tools, and a debugger.
-
-##### Installing Pycharm:
+## Installing Pycharm IDE:
 - You will first need to create a JetBrains account using your Columbia/Barnard `.edu` emails to gain student licenses to JetBrains products
 - Go to https://www.jetbrains.com/student/ and click `Apply Now` to gain free access to JetBrains products
 - Fill in the respective form and follow the steps to have your `.edu` emails authenticated
-- Once you’ve been approved, select Pycharm from the list of products available from your JetBrains account and follow the installation guide. You may need to verify your license/activation code before you can have full access to these products. All these can be obtained from your JetBrains account once approved.
+- Once you’ve been approved, select Pycharm from the list of products available from your JetBrains account and follow the installation guide.
 
-##### Opening project in Pycharm:
+### Opening project in Pycharm:
 Once you have Pycharm open, click on:
 
 File -> Open -> Project Name, in this case `w4156-lecture-code`
@@ -86,7 +83,7 @@ If that is a bit confusing you should follow these steps:
 - At this point, anytime you make a change to requirements.txt, Pycharm will ask you to install the new dependency. For more information, you can check this [link](https://www.jetbrains.com/help/pycharm/creating-requirement-files.html).
 
 
-###### Setup without Pycharm can also be done as follows:
+## Setup without Pycharm can also be done as follows:
 Assumes [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) is installed.
 ```
 virtualenv --python=python3.6 venv
