@@ -4,7 +4,7 @@ Lecture code accompanying W4156
 # Disclaimer
 This project is perhaps the only project that can committed with broken tests as the examples are 'start from here and fix issue'
 
-## Install Git:
+## Step 1: Install Git:
 [Getting Started](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
 
 ### On Mac:
@@ -39,7 +39,7 @@ Git will be covered during lectures. Some simple cheat sheets are listed below:
  - [GitHub's Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
  - [Git reference docs](https://git-scm.com/docs)
 
-## Cloning lecture project from github:
+## Step 2: Clone lecture project from github:
 To clone/download this repository to your computer:
 - Look for the green clone or download button in the code tab of the repository and click on it.
 - Copy the https link of the git repository that is displayed
@@ -51,13 +51,13 @@ git clone https://github.com/geod/w4156-lecture-code.git
 - Cloned repository should now be locally available on your computer in location you specified.
 - You could also download a zipped version of the project by clicking download zip option.
 
-## Install Pycharm IDE:
+## Step 3: Install Pycharm IDE:
 - Create a JetBrains account using your Columbia/Barnard `.edu` emails to gain student licenses to JetBrains products
 - Go to https://www.jetbrains.com/student/ and click `Apply Now` to gain free access to JetBrains products
 - Fill in the respective form and follow the steps to have your `.edu` emails authenticated
 - Once you’ve been approved, select Pycharm from the list of products available from your JetBrains account and follow the installation guide.
 
-### Opening project in Pycharm:
+## Step 4: Opening project in Pycharm:
 Once you have Pycharm open, click on:
 
 File -> Open -> Project Name, in this case `w4156-lecture-code`
