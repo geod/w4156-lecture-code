@@ -82,6 +82,11 @@ If that is a bit confusing you should follow these steps:
 - If you want to use an existing virtual environment on your machine select the second option and make sure you ensure dependencies that appear in requirements.txt file are installed
 - At this point, anytime you make a change to requirements.txt, Pycharm will ask you to install the new dependency. For more information, you can check this [link](https://www.jetbrains.com/help/pycharm/creating-requirement-files.html).
 
+If your system does not have python 3.6 to be used as the interpreter for your virtual environment, you can download it from [here](https://www.python.org/downloads/). Once you have python 3.6, you should be good to go and enable it as your base interpreter for your virtual environment.
+
+ If you want to manage multiple python versions on your system; if you're working on a python project for a different class or personal project that uses a specific version, [pyenv](https://github.com/pyenv/pyenv) will help you do just that! However, it only works on Mac and Linux systems. Note if you use pyenv to install python 3.6, it uses a virtual environment so all you have to do is select existing environment option instead of creating a new one from the project interpreter menu.
+
+ Lastly, if Pycharm for some reason is not automatically picking up your `requirements.txt` file as its source for packages and dependencies, you can configure it by going to Settings/Preference dialog then click [Python Integrated Tools](https://www.jetbrains.com/help/pycharm/python-integrated-tools.html?keymap=secondary_mac_os_x), and finally make sure that package requirements file is set to `requirements.txt`.
 
 ###### Setup without Pycharm can also be done as follows:
 1. `virtualenv --python=python3.6 venv`
