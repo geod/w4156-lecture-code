@@ -1,5 +1,5 @@
 import unittest
-from lectures.testingsamplecode.wrap_around_counter import WrapAroundCounter
+from lectures.testing.theory.wrap_around_counter import WrapAroundCounter
 
 
 class MyTestCase(unittest.TestCase):
