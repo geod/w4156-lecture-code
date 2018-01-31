@@ -1,8 +1,9 @@
 import unittest
-from lectures.testing.theory.legal_drinking import LegalToDrinkCalculatorWithTwoBugs
-from lectures.testing.theory.legal_drinking import LegalToDrinkCalculatorWithOneBug
-from lectures.testing.theory.legal_drinking import LegalToDrinkCalculatorBugFreeIHope
-from lectures.testing.theory.legal_drinking import Nationality
+from lectures.testing.theory.nationality import Nationality
+from lectures.testing.theory.legal_drinking_0bug import LegalToDrinkCalculatorBugFreeIHope
+from lectures.testing.theory.legal_drinking_1bug import LegalToDrinkCalculatorWithOneBug
+from lectures.testing.theory.legal_drinking_2bug import LegalToDrinkCalculatorWithTwoBugs
+
 from typing import Tuple
 
 
@@ -41,7 +42,7 @@ class TestConditionCoverageNoBugs(unittest.TestCase):
         legal = LegalToDrinkCalculatorBugFreeIHope.is_legal(tple[0], tple[1])
         self.assertTrue(legal == tple[2])
 
-    def test_legal_american(self):
+    def test_legal_drinking(self):
         cases = [(21, Nationality.American, True),   # hits statement coverage
                  (20, Nationality.American, False),  # hits branch coverage
                  (18, Nationality.British, True),    # hits condition coverage (evaluated to false previously)
