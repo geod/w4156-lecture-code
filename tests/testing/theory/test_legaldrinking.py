@@ -11,15 +11,13 @@ class Test100StatementCoverageTwoBugs(unittest.TestCase):
 
     def test_legal_drinking(self):
         """
-        This one example shows how we can generate 100% statement coverage but still have a bug
-        :return:
+        This one test case shows how we can generate 100% statement coverage but still have a bug
         """
         self.assertTrue(LegalToDrinkCalculatorWithTwoBugs.is_legal(21, Nationality.American))
 
     def test_should_be_illegal_drinking(self):
         """
-        This one example shows how we can generate 100% statement coverage but still have a bug
-        :return:
+        This test case here exposes there was still a bug
         """
         self.assertFalse(LegalToDrinkCalculatorWithTwoBugs.is_legal(8, Nationality.American))
 
@@ -33,6 +31,10 @@ class Test100BranchCoverageOneBug(unittest.TestCase):
         self.assertFalse(LegalToDrinkCalculatorWithOneBug.is_legal(8, Nationality.American))
 
     def test_illegal_british(self):
+        """
+        The above two test cases hit 100% branch coverage. However, there is still a bug.
+        This test cases exposes the bug
+        """
         self.assertFalse(LegalToDrinkCalculatorWithOneBug.is_legal(17, Nationality.British))
 
 
@@ -46,7 +48,7 @@ class TestConditionCoverageNoBugs(unittest.TestCase):
         cases = [(21, Nationality.American, True),   # hits statement coverage
                  (20, Nationality.American, False),  # hits branch coverage
                  (18, Nationality.British, True),    # hits condition coverage (evaluated to false previously)
-                 (17, Nationality.British, False),
+                 (17, Nationality.British, False),   # (multiple condition coverage)
                  ]
 
         map(lambda x: self.push_assert(x[0], x[1]), cases)
