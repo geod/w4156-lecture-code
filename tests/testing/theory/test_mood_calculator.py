@@ -1,5 +1,5 @@
 import unittest
-from lectures.testingsamplecode.mood_calculator import MoodCalculator, Mood
+from lectures.testing.theory.mood_calculator import MoodCalculator
 
 
 class MyTestCase(unittest.TestCase):

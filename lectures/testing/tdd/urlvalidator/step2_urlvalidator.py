@@ -12,7 +12,6 @@ class URLValidator:
 
         r = requests.get(url)
         # We will only consider OK as valid. 204 is 'invalid' from our perspective
-        print(r.text)
         if r.status_code == 200 and len(r.text) > 0:
             return True
         else:
