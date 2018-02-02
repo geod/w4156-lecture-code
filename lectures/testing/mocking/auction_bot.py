@@ -97,10 +97,13 @@ class AcmeOrderEntryConnector(OrderConnector):
         return r.status_code == requests.codes.ok
 
 
-if __name__ == '__main__':
-    url = "http://localhost:5006"
+"""
+The code would be used something like this
+url = "http://localhost:5006"
+connector = AcmeOrderEntryConnector(url)
+bot = AuctionBot(connector, 15, 18)
+feed = AcmePriceFeedConnector(url, bot)
+feed.run()
+"""
 
-    connector = AcmeOrderEntryConnector(url)
-    bot = AuctionBot(connector, 15, 18)
-    feed = AcmePriceFeedConnector(url, bot)
 
