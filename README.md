@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geod/w4156-lecture-code.svg?branch=master)](https://travis-ci.org/geod/w4156-lecture-code)
+
 # w4156-lecture-code
 Lecture code accompanying W4156
 
