@@ -3,9 +3,8 @@ The following individual lab exercise apply the concepts from lectures
 
 ## Lab 1 - Testing Theory
 
-The structure of the project is the code under test is in 'lectures' and the associated tests are in a parallel 'tests' directory
+The structure of the project is the code under test is in [lectures](lectures/testing/theory) and the associated [tests](tests/testing/theory) are in a parallel 'tests' directory
 
-This lab is[theory](lectures/testing/theory)
 1. Execute test_wraparound_exhaustive.py
 2. Run statement coverage on test_wraparound_exhaustive.py
 4. Consider the test cases for the mood calculator using EP and BVA.
@@ -23,6 +22,8 @@ This lab is[theory](lectures/testing/theory)
   * Run the test cases and generate a coverage report
 
 ## Lab 2 - TDD
+[lecture / code under tests](lectures/testing/tdd) and [tests](tests/testing/tdd)
+
 1. Follow the lecture code for urlvalidator
     * The code accompanies the lectures showing the iterative stages of the TDD process
 
@@ -32,6 +33,7 @@ There is an empty file in the lecture directory (efficient_frontier.py) for you 
 * Follow the TDD process to write the tests and an implementation of efficient_frontier
 
 ## Lab 3 - Mocking
+[lecture / code under tests](lectures/testing/mocking) and [tests](tests/testing/mocking)
 
 1. Follow through the auction_bot code
 * Run the unit tests test_auction_bot.py until you understand what has been mocked and how the unit tests work
@@ -39,6 +41,7 @@ There is an empty file in the lecture directory (efficient_frontier.py) for you 
 2. Devise your own simple example of a class with an external dependency that you need to mock to be able to test your code.
 
 ## Lab 4 - Levels
+[lecture / code under tests](lectures/testing/levels) and [tests](tests/testing/levels)
 
 We are now going to stitch together a few of the skills into a small example that also covers testing. In this lab
 you will write a very simple store. The store has inventory/stock and a till to keep track of money. I suggest you model your code as
