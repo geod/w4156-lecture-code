@@ -29,6 +29,8 @@ class NearestEnemyFinder:
         :param signatures: a list of radar signatures of planes. Coordinate system based around our plane being (0,0)
         :return: the N nearest enemy targets. If there are less than N enemy radar then return the
         """
-        pass
+
+        # TODO - exercise for the student to write an implementation
+
 
 

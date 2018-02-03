@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import MagicMock
-
 from lectures.testing.mocking.auction_bot import AuctionBot, Quote, AcmeOrderEntryConnector, Order
 
 
@@ -9,7 +8,7 @@ class AuctionBotTestCase(unittest.TestCase):
     Remember there are three components
     A) the feed (gets prices)
     B) the auction bot (the business logic)
-    C) the order connector
+    C) the order connector (sends orders to the auction venue)
 
 
     The challenge with testing the OVERALL auction bot is
@@ -59,6 +58,7 @@ class AuctionBotTestCase(unittest.TestCase):
         # I expect that the auction bot submitted an order so I assert
         self.assertOrder(Order.SIDE.BUY, 6, 1)
 
+        # If the quote remains 5 then nothing should be submitted / change
         self.auction_bot.on_price_change(Quote(5))
         self.assertNoCall()
 

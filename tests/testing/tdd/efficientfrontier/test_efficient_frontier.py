@@ -52,7 +52,7 @@ class TestEffficientFrontier(unittest.TestCase):
         If they pass: Refactor the code if required
         GOTO 2
 
-        Run test coverage
+        Run test coverage. Inspect the coverage and make a decision about whether test suite is 'adequate'
         """
         pass
 
