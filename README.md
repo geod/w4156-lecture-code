@@ -3,8 +3,17 @@
 # w4156-lecture-code
 Lecture code accompanying W4156
 
+# Labs
+Once you have followed installation instructions below the labs corresponding to lectures are [here](LABS.md)
+
 # Disclaimer
-This project is perhaps the only project that can committed with broken tests as the examples are 'start from here and fix issue'
+This project includes labs for students to 'fix' code. As a result, there are a few tests that are committed that will
+(if executed) fail. There is CI set up on the project. Therefore, tests which are meant to fail are disabled for CI and
+are marked with the following decorator
+'''
+@helper.skip_intentionally_failing()
+def test_should_be_illegal_drinking(self):
+'''
 
 ## Step 1: Install Git:
 [Getting Started](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
