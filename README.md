@@ -50,17 +50,16 @@ Git will be covered during lectures. Some simple cheat sheets are listed below:
  - [GitHub's Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
  - [Git reference docs](https://git-scm.com/docs)
 
-## Step 2: Clone lecture project from github:
-To clone/download this repository to your computer:
-- Look for the green clone or download button in the code tab of the repository and click on it.
-- Copy the https link of the git repository that is displayed
-- Open the terminal on your computer and navigate to location where you want your repository to be saved
-- Type git clone followed by repository-link-you-copied, so in this case:
-```
-git clone https://github.com/geod/w4156-lecture-code.git
-```
-- Cloned repository should now be locally available on your computer in location you specified.
-- You could also download a zipped version of the project by clicking download zip option.
+## Step 2: For this repository and download:
+You are going to 'fork' the repo to have your own copy. This means you can work on labs and commit locally.
+
+To fork it follow these [instructions](https://help.github.com/articles/fork-a-repo/) 
+
+Before you follow the instructions create a directory where you will work. Generally I create two folders
+1. /home/me/developer (where I keep all codebases)
+2. /home/me/developerTools (where I download any common developer tools across projects)
+
+You then need to clone the fork you have created. See [instructions](https://help.github.com/articles/fork-a-repo/#step-2-create-a-local-clone-of-your-fork)
 
 ## Step 3: Install Pycharm IDE:
 - Create a JetBrains account using your Columbia/Barnard `.edu` emails to gain student licenses to JetBrains products
