@@ -19,7 +19,8 @@ class Test100StatementCoverageTwoBugs(unittest.TestCase):
     @helper.skip_intentionally_failing()
     def test_should_be_illegal_drinking(self):
         """
-        This test case here exposes there was still a bug
+        This second test case here exposes there was still a bug. Remember - the single test case above generated 100%
+        statement coverage
         """
         self.assertFalse(LegalToDrinkCalculatorWithTwoBugs.is_legal(8, Nationality.American))
 
@@ -30,6 +31,9 @@ class Test100BranchCoverageOneBug(unittest.TestCase):
         self.assertTrue(LegalToDrinkCalculatorWithOneBug.is_legal(21, Nationality.American))
 
     def test_illegal(self):
+        """
+        We fix the code and add this test cases now fails
+        """
         self.assertFalse(LegalToDrinkCalculatorWithOneBug.is_legal(8, Nationality.American))
 
     @helper.skip_intentionally_failing()
