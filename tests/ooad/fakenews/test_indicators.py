@@ -4,6 +4,8 @@ import requests_mock
 from unittest.mock import MagicMock, Mock
 from freezegun import freeze_time
 import datetime
+import os
+from tests.ooad.fakenews import TEST_DIR
 
 
 class AbstractScorerTest(unittest.TestCase):
@@ -18,7 +20,7 @@ class TestContentScorer(AbstractScorerTest):
     def setUp(self):
         # note when unit tests run the home directory is tests/ooad/fakenews
         # this allows us to set a local data file specifically for testing
-        self._scorer = ContentScorer(filename="keywords.csv")
+        self._scorer = ContentScorer(baseconfigdir=os.path.dirname(__file__), filename="keywords.csv")
 
     @requests_mock.mock()
     def test_content(self, m):
@@ -45,7 +47,7 @@ class TestWhitelistScorer(AbstractScorerTest):
     def setUp(self):
         # note when unit tests run the home directory is tests/ooad/fakenews
         # this allows us to set a local data file specifically for testing
-        self._scorer = WhitelistScorer(filename="whitelist.txt")
+        self._scorer = WhitelistScorer(baseconfigdir=os.path.dirname(__file__), filename='whitelist.csv')
 
     def test_whitelist(self):
         # not in whitelist
@@ -78,28 +80,26 @@ class TestWhoisScorer(AbstractScorerTest):
     def setUp(self):
         self._scorer = WhoisScorer()
 
-    @freeze_time("2018-01-01")
     def test_whois(self):
-        # not found
+        with freeze_time("2018-01-01"):
+            whois.query = MagicMock(return_value=MockDomain(datetime.date(2011, 6, 21)))
+            self.assertScore("verylongtime", 1.0)
 
-        whois.query = MagicMock(return_value=MockDomain(datetime.date(2011, 6, 21)))
-        self.assertScore("verylongtime", 1.0)
+            # 0 days
+            whois.query = MagicMock(return_value=MockDomain(datetime.date(2018, 1, 1)))
+            self.assertScore("zerodays", 0.0)
 
-        # 0 days
-        whois.query = MagicMock(return_value=MockDomain(datetime.date(2018, 1, 1)))
-        self.assertScore("zerodays", 0.0)
+            # 365
+            whois.query = MagicMock(return_value=MockDomain(datetime.date(2017, 1, 1)))
+            self.assertScore("oneyear", 0.5)
 
-        # 365
-        whois.query = MagicMock(return_value=MockDomain(datetime.date(2017, 1, 1)))
-        self.assertScore("oneyear", 0.5)
+            # 730
+            whois.query = MagicMock(return_value=MockDomain(datetime.date(2016, 1, 1)))
+            self.assertScore("oneyear", 1.0)
 
-        # 730
-        whois.query = MagicMock(return_value=MockDomain(datetime.date(2016, 1, 1)))
-        self.assertScore("oneyear", 1.0)
-
-        # lets be a bit paranoid - forward date
-        whois.query = MagicMock(return_value=MockDomain(datetime.date(2020, 1, 1)))
-        self.assertScore("forwarddate", 0.0)
+            # lets be a bit paranoid - forward date
+            whois.query = MagicMock(return_value=MockDomain(datetime.date(2018, 1, 2)))
+            self.assertScore("forwarddate", 0.0)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,14 +1,15 @@
-import os
-import unittest
-import tempfile
 import json
+import os
+import tempfile
+import unittest
+
+import helper as helper
 import lectures.debugging.user_service as service
-from lectures.debugging.user_service import app, init_db
 
 
 # https://damyanon.net/flask-series-testing/
 # http://flask.pocoo.org/docs/0.12/testing/
-class ApplicationTests(unittest.TestCase):
+class UserServiceTest(unittest.TestCase):
 
     one_direction = ["Niall", "Liam", "Louis", "Harry"]
 
@@ -30,7 +31,7 @@ class ApplicationTests(unittest.TestCase):
     def setUp(self):
         self.db_fd, service.app.config['DATABASE'] = tempfile.mkstemp()
         service.app.config['TESTING'] = True
-        self.app = app.test_client()
+        self.app = service.app.test_client()
         with service.app.app_context():
             service.init_db()
 
@@ -39,38 +40,42 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual(res.status, '200 OK')
 
     def test_create_user(self, name="brian"):
-        res = self.app.get("/createuser/" + name)
+        res = self.app.post("/users", data=dict(name=name))
         self.assertSuccess(res)
 
-        res = self.app.get("/countusers")
+        res = self.app.get("/users/count")
         self.assertCount(res, 1)
 
     def test_create_duplicate_user(self):
-        res = self.app.get("/createuser/brian")
-        res = self.app.get("/createuser/brian")
+        res = self.app.post("/users", data=dict(name="brian"))
+        res = self.app.post("/users", data=dict(name="brian"))
         self.assertFailure(res)
+
+        res = self.app.get("/users/count")
+        self.assertCount(res, 1)
 
     def test_list_users(self):
         for u in self.one_direction:
-            res = self.app.get("/createuser/" + u)
+            res = self.app.post("/users", data=dict(name=u))
 
-        res = self.app.get("/listusers")
+        res = self.app.get("/users")
         self.assertSuccess(res)
 
         data = json.loads(res.data)
         self.assertEquals(data['users'], self.one_direction)
 
-        res = self.app.get("/countusers")
+        res = self.app.get("/users/count")
         self.assertCount(res, 4)
 
-    # def test_w4156(self):
-    #     # Committed and it should fail
-    #     res = self.app.get("/createuser/" + "ryan")
-    #     res = self.app.get("/countusers")
-    #     self.assertCount(res, 1)
-    #
-    #     res = self.app.get("/countusers")
-    #     self.assertCount(res, 1)
+    @helper.skip_intentionally_failing()
+    def test_problematic_scenario(self):
+        # Committed and it should fail
+        res = self.app.post("/users", data=dict(name="ryan"))
+        res = self.app.get("/users")
+        self.assertCount(res, 1)
+
+        res = self.app.get("/users/count")
+        self.assertCount(res, 1)
 
     def tearDown(self):
         os.close(self.db_fd)

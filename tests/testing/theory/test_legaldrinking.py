@@ -5,6 +5,7 @@ from lectures.testing.theory.legal_drinking_1bug import LegalToDrinkCalculatorWi
 from lectures.testing.theory.legal_drinking_2bug import LegalToDrinkCalculatorWithTwoBugs
 
 from typing import Tuple
+import tests.helper as helper
 
 
 class Test100StatementCoverageTwoBugs(unittest.TestCase):
@@ -15,6 +16,7 @@ class Test100StatementCoverageTwoBugs(unittest.TestCase):
         """
         self.assertTrue(LegalToDrinkCalculatorWithTwoBugs.is_legal(21, Nationality.American))
 
+    @helper.skip_intentionally_failing()
     def test_should_be_illegal_drinking(self):
         """
         This test case here exposes there was still a bug
@@ -30,6 +32,7 @@ class Test100BranchCoverageOneBug(unittest.TestCase):
     def test_illegal(self):
         self.assertFalse(LegalToDrinkCalculatorWithOneBug.is_legal(8, Nationality.American))
 
+    @helper.skip_intentionally_failing()
     def test_illegal_british(self):
         """
         The above two test cases hit 100% branch coverage. However, there is still a bug.

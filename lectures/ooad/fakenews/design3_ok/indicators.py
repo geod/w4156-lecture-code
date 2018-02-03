@@ -16,9 +16,9 @@ class AbstractDomainScorer(ABC):
 
 class WhitelistScorer(AbstractDomainScorer):
 
-    def __init__(self, filename='whitelist.csv'):
+    def __init__(self, baseconfigdir=".", filename='whitelist.csv'):
         self.__whitelist = {}
-        with open(filename) as csvfile:
+        with open(baseconfigdir + "/" + filename) as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in csvreader:
                 self.__whitelist[row[0].lower()] = float(row[1])
@@ -33,9 +33,9 @@ class WhitelistScorer(AbstractDomainScorer):
 
 class ContentScorer(AbstractDomainScorer):
 
-    def __init__(self, filename='keywords.csv'):
+    def __init__(self, baseconfigdir=".", filename='keywords.csv'):
         self.__keywords = []
-        with open(filename) as csvfile:
+        with open(baseconfigdir + "/" + filename) as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in csvreader:
                 self.__keywords.append(row[0])
@@ -76,7 +76,7 @@ class AggregateScorer(AbstractDomainScorer):
         self.__scorers.append(scorer)
 
     def score_domain(self, newsurl):
-        scores = [None] * len(self.__scorers)
+        scores = []
         for scorer in self.__scorers:
             scores.append(scorer.score_domain(newsurl))
         res = mean(scores)
@@ -85,10 +85,10 @@ class AggregateScorer(AbstractDomainScorer):
 
 class ScorerFactory:
 
-    def create(self):
+    def create(self, baseconfigdir="."):
         aggregator = AggregateScorer()
-        aggregator.add_scorer(ContentScorer())
-        aggregator.add_scorer(WhitelistScorer())
+        aggregator.add_scorer(ContentScorer(baseconfigdir))
+        aggregator.add_scorer(WhitelistScorer(baseconfigdir))
         aggregator.add_scorer(WhoisScorer())
         return aggregator
 

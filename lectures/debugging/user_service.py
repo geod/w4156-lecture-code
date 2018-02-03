@@ -2,7 +2,7 @@ from flask import Flask
 import logging
 import sqlite3
 import os
-from flask import jsonify, g
+from flask import jsonify, g, request
 
 app = Flask(__name__)
 
@@ -67,8 +67,8 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/user/<name>')
-def create_user(name=None):
+@app.route('/users', methods=["POST"])
+def create_user():
     """
     {
         "success": true/false,
@@ -78,26 +78,28 @@ def create_user(name=None):
         }
     }
     """
-    logging.debug("creatuser/%s", name)
+    name = request.form['name']
+    logging.debug("create user/%s", name)
     db = get_db()
-    exists = db.execute("select * from USERS "
-                        "where username == ?",
-                        (name,)).fetchone()
+    exists = db.execute("select * from USERS where username == ?", (name,)).fetchone()
     if exists:
         return jsonify(
             success=False,
             error={'code': 0, 'message': "exists"}
         )
     else:
-        db.execute("insert into USERS (username) values (?)", (name,))
-        db.commit()  # we might have accidentally forgotten this line!
+        cursor = db.cursor()
+        cursor.execute("insert into USERS (username) values (?)", (name,))
+        id = cursor.lastrowid
+        db.commit()
         return jsonify(
             success=True,
+            id=id,
             error={}
         )
 
 
-@app.route('/users')
+@app.route('/users', methods=["GET"])
 def list_users():
     """
     {
@@ -118,7 +120,7 @@ def list_users():
     )
 
 
-@app.route('/usercount')
+@app.route('/users/count', methods=["GET"])
 def count_users():
     """
     {
@@ -131,13 +133,12 @@ def count_users():
     }
     """
     db = get_db()
-
     rows = db.execute("delete from USERS").rowcount
-    db.commit()
     return jsonify(
         success=True,
         count=rows
     )
+
 
 if __name__ == "__main__":
     app.run()

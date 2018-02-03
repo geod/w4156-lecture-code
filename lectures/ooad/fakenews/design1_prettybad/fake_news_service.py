@@ -15,6 +15,7 @@ def score_url(newsurl):
     content_score = content_scorer.score_domain(newsurl)
     whitelist_score = whitelist_scorer.score_domain(newsurl)
     whois_score = whois_scorer.score_domain(newsurl)
+
     score = content_score + whitelist_score + whois_score / 3
     return json({'score': score})
 
