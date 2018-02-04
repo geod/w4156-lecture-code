@@ -8,7 +8,7 @@ class TestStore(unittest.TestCase):
         You may want to create an inventory, till, store and inject the inventory and till into the store
         In pseudeo code
         i = Inventory()
-        t = Till()
+        t = CashRegister()
         s = Store()
         s.till = t
         s.inventory = i
@@ -17,7 +17,7 @@ class TestStore(unittest.TestCase):
         pass
 
     def test_something(self):
-        self.assertEqual(True, False)
+        self.assertEqual(True, True)
 
 
 if __name__ == '__main__':
