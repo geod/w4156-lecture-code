@@ -16,7 +16,7 @@ class RadarSignature:
         :param friend_foe: is the plane friendly or foe
         """
         self.x = x
-        self.x = y
+        self.y = y
         self.friend_foe = friend_foe
 
 
