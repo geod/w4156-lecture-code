@@ -35,7 +35,7 @@ class MyTestCase(unittest.TestCase):
                  (1000, 1),
                  (1001, 1)]
 
-        map(lambda x: self.push_assert(x[0], x[1]), cases)
+        list(map(lambda x: self.push_assert(x[0], x[1]), cases))
 
 
 if __name__ == '__main__':
