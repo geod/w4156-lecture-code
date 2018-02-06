@@ -50,7 +50,7 @@ Git will be covered during lectures. Some simple cheat sheets are listed below:
  - [GitHub's Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
  - [Git reference docs](https://git-scm.com/docs)
 
-## Step 2: For this repository and download:
+## Step 2: Fork this repository and download:
 You are going to 'fork' the repo to have your own copy. This means you can work on labs and commit locally.
 
 To fork it follow these [instructions](https://help.github.com/articles/fork-a-repo/) 
