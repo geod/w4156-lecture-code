@@ -58,7 +58,7 @@ class TestConditionCoverageNoBugs(unittest.TestCase):
                  (17, Nationality.British, False),   # (multiple condition coverage)
                  ]
 
-        map(lambda x: self.push_assert(x[0], x[1]), cases)
+        list(map(lambda x: self.push_assert((x[0], x[1], x[2])), cases))
 
 if __name__ == '__main__':
     unittest.main()
