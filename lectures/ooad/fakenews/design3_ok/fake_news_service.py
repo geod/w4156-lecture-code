@@ -7,7 +7,7 @@ from flask import request
 
 app = Flask(__name__)
 
-scorer = 3
+scorer = None
 
 
 def init():
@@ -19,7 +19,6 @@ def init():
 
 @app.route('/fakenews')
 def score_url():
-    print ("FOOO")
     newsurl = request.args.get('newsurl')
     result = scorer.score_domain(newsurl)
     return jsonify({'score': result, 'code': "SUCCESS"})
