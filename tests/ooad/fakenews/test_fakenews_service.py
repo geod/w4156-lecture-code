@@ -29,7 +29,6 @@ class FlaskrTestCase(unittest.TestCase):
         self.app = fake_news_service.app.test_client()
 
         fake_news_service.init()
-        #with fake_news_service.app.app_context():
 
     def test_service(self):
         with requests_mock.Mocker() as m:

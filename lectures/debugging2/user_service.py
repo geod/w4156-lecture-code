@@ -134,7 +134,6 @@ def count_users():
     """
     db = get_db()
     rows = db.execute("delete from USERS").rowcount
-    db.commit()
     return jsonify(
         success=True,
         count=rows
