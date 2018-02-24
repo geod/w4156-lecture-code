@@ -62,3 +62,52 @@ Your task should you choose to accept it
 There should be three tests. Three empty files exist test_inventory.py, test_till.py and test_store.py. Remember, there
 are different levels of testing. We will write tests for the inventory and till individualls. Then we assemble this with the store and write
 tests for all three objects wired together. Consider which test cases are appropriate for each class/level.
+
+## Lab 5 - Debugging
+
+[lecture / code under tests](lectures/testing/debugging) and [tests](tests/testing/debugging)
+
+In this example we have some code with a bug. We want to be systematic in rectifying. We did cover this example in class 
+but I think there is value in running through the workflow yourself and getting familiar with the debugging tools
+
+Remember the systematic process is:
+0. Tracking (in our project we will capture bugs in Trello)
+1. Reproducing - by forming a hypothesis
+2. Automating the test case
+3. Finding the infection origin
+4. Focus on most likely origin
+5. Isolate the infection chain
+6. Correct the defect
+
+The bug report from a users is
+
+![Bug](assets/debugging_call_to_action?raw=true "Bug!")
+
+1. Run the user service (user_service.py)
+2. Install [postman](https://www.getpostman.com/). You will find this tool useful if you produce any REST APIs
+3. Explore creating, listing and counting until you replicate the bug. The service allows you to create, list and count 
+users using HTTP GET and POST commands 
+* Create
+![Create](assets/postman_users_create.png?raw=true "Title")
+* List
+![List](assets/postman_users_list.png?raw=true "Title")
+* Count
+![Count](assets/postman_users_count.png?raw=true "Title")
+
+4. Form the hypothesis as to the nature of the bug
+5. Write a test case which replicates the issue [lecture / code under tests](lectures/testing/debugging/test_user_service.py). 
+There is a placeholder test for you
+```python
+    def test_lab_for_student(self):
+        # Exercise to the student
+        # Write a test which replicates the bug
+        pass
+```
+Remember you can use the IDE facilities to debug into the code.
+6. Find the infection origin
+7. Fix
+8. Rerun the unit test you write as part of #5
+9. Commit into your local fork
+
+
+

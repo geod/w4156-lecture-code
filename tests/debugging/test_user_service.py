@@ -67,15 +67,11 @@ class UserServiceTest(unittest.TestCase):
         res = self.app.get("/users/count")
         self.assertCount(res, 4)
 
-    @helper.skip_intentionally_failing()
-    def test_problematic_scenario(self):
-        # Committed and it should fail
-        res = self.app.post("/users", data=dict(name="ryan"))
-        res = self.app.get("/users")
-        self.assertCount(res, 1)
+    def test_lab_for_student(self):
+        # Exercise to the student
+        # Write a test which replicates the bug
+        pass
 
-        res = self.app.get("/users/count")
-        self.assertCount(res, 1)
 
     def tearDown(self):
         os.close(self.db_fd)

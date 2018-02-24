@@ -4,10 +4,13 @@ import sqlite3
 import os
 from flask import jsonify, g, request
 
+"""
+Derived from flaskr example: http://flask.pocoo.org/docs/0.12/tutorial/
+"""
+
 app = Flask(__name__)
 
-logger = logging.getLogger('debugging_lecture')
-logger.setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.DEBUG)
 
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flaskr.db'),
@@ -24,11 +27,12 @@ db = sqlite3.connect(app.config['DATABASE'])
 def initdb_command():
     """Creates the database tables."""
     init_db()
-    print('Initialized the database.')
+    logging.info('Initialized the database.')
 
 
 def init_db():
     """Initializes the database."""
+    logging.debug("init_db() ....")
     db = get_db()
     with app.open_resource('schema.sql', mode='r') as f:
         sql = f.read()
@@ -38,7 +42,7 @@ def init_db():
 
 def connect_db():
     """Connects to the specific database."""
-    print ("CONNECT")
+    logging.info("Connecting to Database")
     rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
     return rv
@@ -48,7 +52,7 @@ def get_db():
     """Opens a new database connection if there is none yet for the
     current application context.
     """
-    print ("g %s, %b", g, hasattr(g, 'sqlite_db'))
+    logging.info("g %s, %s", g, hasattr(g, 'sqlite_db'))
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
@@ -56,7 +60,7 @@ def get_db():
 
 @app.teardown_appcontext
 def close_db(error):
-    print ("TD")
+    logging.info("Teardown")
     """Closes the database again at the end of the request."""
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
@@ -79,7 +83,7 @@ def create_user():
     }
     """
     name = request.form['name']
-    logging.debug("create user/%s", name)
+    logging.debug("create user:%s", name)
     db = get_db()
     exists = db.execute("select * from USERS where username == ?", (name,)).fetchone()
     if exists:
@@ -111,6 +115,7 @@ def list_users():
         }
     }
     """
+    logging.debug("list users ...")
     db = get_db()
     l = list(db.execute("select username from USERS"))
     l = [i[0] for i in l]
@@ -132,6 +137,7 @@ def count_users():
         }
     }
     """
+    logging.debug("count users ...")
     db = get_db()
     rows = db.execute("delete from USERS").rowcount
     db.commit()
@@ -140,7 +146,10 @@ def count_users():
         count=rows
     )
 
-
 if __name__ == "__main__":
+    logging.info("Starting User Service .....")
+    with app.app_context():
+        init_db()
     app.run(port=5001)
+
 
