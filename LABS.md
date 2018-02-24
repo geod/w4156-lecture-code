@@ -81,7 +81,7 @@ Remember the systematic process is:
 
 The bug report from a users is
 
-![Bug](assets/debugging_call_to_action?raw=true "Bug!")
+![Bug](assets/debugging_call_to_action.png?raw=true "Bug!")
 
 1. Run the user service (user_service.py)
 2. Install [postman](https://www.getpostman.com/). You will find this tool useful if you produce any REST APIs
