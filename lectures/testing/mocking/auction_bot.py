@@ -16,6 +16,9 @@ class Order:
         self.price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return self.side.name + ":" + str(self.price) + "@" + str(self.quantity)
+
 
 class OrderConnector(ABC):
 
@@ -95,15 +98,5 @@ class AcmeOrderEntryConnector(OrderConnector):
         data = {'side': order.side, 'price': order.price, 'quantity': order.quantity}
         r = requests.post(self._url + '/order', data)
         return r.status_code == requests.codes.ok
-
-
-"""
-The code would be used something like this
-url = "http://localhost:5006"
-connector = AcmeOrderEntryConnector(url)
-bot = AuctionBot(connector, 15, 18)
-feed = AcmePriceFeedConnector(url, bot)
-feed.run()
-"""
 
 

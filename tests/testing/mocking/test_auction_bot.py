@@ -1,6 +1,35 @@
 import unittest
-from unittest.mock import MagicMock
-from lectures.testing.mocking.auction_bot import AuctionBot, Quote, AcmeOrderEntryConnector, Order
+import logging
+from lectures.testing.mocking.auction_bot import AuctionBot, Quote, Order
+
+logging.getLogger().setLevel(logging.DEBUG)
+
+
+class MockConnector:
+    """
+    There are various python helpers for this. However, lets write an actual mock class ourselves just to make
+    it blatantly obvious what is happening.
+
+    We can then use the various python helpers (magic mock) to do the same without having to write my own mock instances
+    of various objects (in this instance writing a mock connector is boring and tedious). This is why mocking frameworks
+    exist.
+    """
+    def __init__(self):
+        self.i_was_called_with = []
+
+    def submit_order(self, order: Order):
+        logging.debug("Mock Connector was called with:%s" % (order))
+        self.i_was_called_with.append(order)
+        return True
+
+    def number_calls(self):
+        return len(self.i_was_called_with)
+
+    def pop(self):
+        return self.i_was_called_with.pop()
+
+    def reset(self):
+        self.i_was_called_with.clear()
 
 
 class AuctionBotTestCase(unittest.TestCase):
@@ -10,28 +39,22 @@ class AuctionBotTestCase(unittest.TestCase):
     B) the auction bot (the business logic)
     C) the order connector (sends orders to the auction venue)
 
+    Lets say I want to focus on testing the auction bot business logic
+    1. I DO NOT need to mock the feed connector (because the auction bot does not have a reference to it
+    2. However, the auction bot does know about the connector. Therefore, I need to mock it out to test the auction
+    bot in isolation
 
-    The challenge with testing the OVERALL auction bot is
-    1. It connects to something external (that we may not have the code of and control)
-    2. We want to test the individual units of our program independently
+    When I do this I have
+    AuctionBot -> MockConnector
 
-    Let's say in this test case we want to focus on testing the auction bot business logic.
-    How can we test that independently of the feed, the order connector or the external exchange?
+    In this test I:
+    Push in values -> AuctionBot -> Capture What AuctionBot asked the connector to do
     """
-
     def setUp(self):
-        # We create an instance of connector
-        connector = AcmeOrderEntryConnector("foo")
+        self.mock_connector = MockConnector()
 
-        # but importantly we create a mock object
-        self.mock_submit = MagicMock(return_value=True)
-
-        # and override the submit_order method to be a mock
-        # This means whenever someone calls 'submit_order' they hit our mock and not the real connector
-        connector.submit_order = self.mock_submit
-
-        # we then create a normal auction bot. The connector that we pass has the submit_order method mocked
-        self.auction_bot = AuctionBot(connector, 10)
+        # we then create a normal auction bot. We pass it a mock connector
+        self.auction_bot = AuctionBot(self.mock_connector, 10)
 
     def assertOrder(self, side: Order.SIDE, price: int, quantity: int):
         """
@@ -41,15 +64,15 @@ class AuctionBotTestCase(unittest.TestCase):
         :param quantity:
         :return:
         """
-        self.mock_submit.assert_called_once()
-        submitted_order: Order = self.mock_submit.call_args[0][0]
+        self.assertEqual(self.mock_connector.number_calls(), 1)
+        submitted_order: Order = self.mock_connector.pop()
         self.assertEqual(submitted_order.side, side)
         self.assertEqual(submitted_order.price, price)
         self.assertEqual(submitted_order.quantity, quantity)
-        self.mock_submit.reset_mock()
+        self.mock_connector.reset()
 
     def assertNoCall(self):
-        self.mock_submit.assert_not_called()
+        self.assertEqual(self.mock_connector.number_calls(), 0)
 
     def test_auction_bot(self):
         # I am pushing in a dummy quote
