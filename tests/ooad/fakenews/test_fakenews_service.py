@@ -1,13 +1,12 @@
 import os
-import requests_mock
-import lectures.ooad.fakenews.design3_ok.fake_news_service as fake_news_service
+import datetime
 import unittest
 import whois
+import requests_mock
 from unittest.mock import MagicMock
-from tests.ooad.fakenews.test_indicators import MockDomain
-import datetime
-import os
-
+from tests.ooad.fakenews.test_scorers import MockDomain
+import lectures.ooad.fakenews.design3_ok.fake_news_service as fake_news_service
+import json
 
 class FlaskrTestCase(unittest.TestCase):
     """
@@ -31,12 +30,29 @@ class FlaskrTestCase(unittest.TestCase):
         fake_news_service.init()
 
     def test_service(self):
-        with requests_mock.Mocker() as m:
-            m.get("http://fooboo.com", text='<html>the response <b> of this devoid</html>')
+        with requests_mock.Mocker() as mocker:
+            '''
+            Remember - the scorers make requests. I don't want to have have it actually hit the real websites
+            (in unit tests) so I use a fancy feature which mocks what requests (the pyton package will return)
+            '''
+            mocker.get("http://fooboo.com", text='<html>the response <b> of this devoid</html>')
             whois.query = MagicMock(return_value=MockDomain(datetime.date(2011, 6, 21)))
 
+            # I push in a valid URL and get back a result
             res = self.app.get('/fakenews?newsurl=http://fooboo.com')
             self.assertTrue(res.status_code == 200)
+
+            '''
+                Exercise to the student
+                1. parse and assert score within range
+                2. failure test cases
+
+                NOTE - when it comes to testing we do not need to test each scorer in this test
+                Each scorer has already been tested
+                In *this* test we are testing it all plugs together and that flask marshalls data in and out correctly
+            '''
+
+
 
 
 if __name__ == '__main__':

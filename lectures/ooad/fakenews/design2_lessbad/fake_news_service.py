@@ -1,4 +1,4 @@
-from .indicators import *
+from .scorer import *
 import logging
 
 from flask import Flask
@@ -14,7 +14,8 @@ aggregator.add_scorer(WhoisScorer())
 
 
 @app.route('/fakenews')
-def score_url(newsurl):
+def score_url():
+    newsurl = request.args.get('newsurl')
     score = aggregator.score_domain(newsurl)
     return json({'score': score})
 

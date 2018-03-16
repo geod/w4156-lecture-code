@@ -1,4 +1,4 @@
-from .indicators import *
+from .scorer import *
 import logging
 
 from flask import Flask
@@ -11,7 +11,8 @@ whois_scorer = WhoisScorer()
 
 
 @app.route('/fakenews')
-def score_url(newsurl):
+def score_url():
+    newsurl = request.args.get('newsurl')
     content_score = content_scorer.score_domain(newsurl)
     whitelist_score = whitelist_scorer.score_domain(newsurl)
     whois_score = whois_scorer.score_domain(newsurl)

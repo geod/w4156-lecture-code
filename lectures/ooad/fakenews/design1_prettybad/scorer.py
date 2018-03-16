@@ -8,10 +8,18 @@ class AbstractDomainScorer(ABC):
 
     @abstractmethod
     def score_domain(self, newsurl):
+        """
+        Provides a score for the trustworthyness of a domain
+        :param newsurl:
+        :return: a score for the trustworthyness between 0 and 1 where 1 is fully trustworthy and 0 is nonsense
+        """
         pass
 
 
 class WhitelistScorer(AbstractDomainScorer):
+    """
+    Whitelist scorer scores on whether the domain is in a preconfigured whitelist
+    """
 
     def __init__(self, filename):
         self.__whitelist = {}

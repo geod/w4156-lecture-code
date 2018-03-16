@@ -23,7 +23,8 @@ with open('keywords.txt') as csvfile:
 
 
 @app.route('/fakenews')
-def score_url(newsurl):
+def score_url():
+    newsurl = request.args.get('newsurl')
     # whitelisting of the domain
     if newsurl is None:
         raise ValueError('Requires valid URL')

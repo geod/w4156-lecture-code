@@ -16,9 +16,9 @@ class AbstractDomainScorer(ABC):
 
 class WhitelistScorer(AbstractDomainScorer):
 
-    def __init__(self, baseconfigdir=".", filename='whitelist.csv'):
+    def __init__(self, filename='whitelist.csv'):
         self.__whitelist = {}
-        with open(baseconfigdir + "/" + filename) as csvfile:
+        with open(filename) as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in csvreader:
                 self.__whitelist[row[0].lower()] = float(row[1])
@@ -33,9 +33,9 @@ class WhitelistScorer(AbstractDomainScorer):
 
 class ContentScorer(AbstractDomainScorer):
 
-    def __init__(self, baseconfigdir=".", filename='keywords.csv'):
+    def __init__(self, filename='keywords.csv'):
         self.__keywords = []
-        with open(baseconfigdir + "/" + filename) as csvfile:
+        with open(filename) as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in csvreader:
                 self.__keywords.append(row[0])
@@ -66,6 +66,13 @@ class WhoisScorer(AbstractDomainScorer):
 
 
 class AggregateScorer(AbstractDomainScorer):
+    """
+    A scorer which contains a list of scorers. When asked to score a URL it asks each scorer to provide a score then averages
+    the result.
+
+    Prepare for mind blown: AggregateScorer is also a scorer in that it implements the same contract of score_domain even though it
+    behaves differently!!!!
+    """
 
     def __init__(self):
         self.__scorers = []
@@ -76,19 +83,8 @@ class AggregateScorer(AbstractDomainScorer):
         self.__scorers.append(scorer)
 
     def score_domain(self, newsurl):
-        scores = []
+        scores = [None] * len(self.__scorers)
         for scorer in self.__scorers:
             scores.append(scorer.score_domain(newsurl))
         res = mean(scores)
         return res
-
-
-class ScorerFactory:
-
-    def create(self, baseconfigdir="."):
-        aggregator = AggregateScorer()
-        aggregator.add_scorer(ContentScorer(baseconfigdir))
-        aggregator.add_scorer(WhitelistScorer(baseconfigdir))
-        aggregator.add_scorer(WhoisScorer())
-        return aggregator
-

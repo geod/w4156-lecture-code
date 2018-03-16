@@ -1,4 +1,4 @@
-from lectures.ooad.fakenews.design3_ok.indicators import *
+from lectures.ooad.fakenews.design3_ok.scorer import *
 import unittest
 import requests_mock
 from unittest.mock import MagicMock, Mock
